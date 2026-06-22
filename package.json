@@ -1,0 +1,55 @@
+{
+  "name": "metadaddy",
+  "version": "0.1.1",
+  "description": "Desktop metadata inspector and safe metadata writer for video and image files.",
+  "main": "electron/main.cjs",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "smoke": "node scripts/smoke.cjs"
+  },
+  "keywords": [
+    "metadata",
+    "exif",
+    "video",
+    "image",
+    "electron"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "exiftool-vendored": "^36.0.0",
+    "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0"
+  },
+  "devDependencies": {
+    "electron": "^42.4.1",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.metadaddy.app",
+    "productName": "MetaDADDY",
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "node_modules/exiftool-vendored.*/**/*",
+      "node_modules/ffmpeg-static/**/*",
+      "node_modules/ffprobe-static/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "directories": {
+      "output": "release"
+    }
+  }
+}
