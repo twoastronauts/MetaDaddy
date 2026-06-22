@@ -1,13 +1,13 @@
 {
   "name": "metadaddy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Desktop metadata inspector and safe metadata writer for video and image files.",
   "main": "electron/main.cjs",
   "private": true,
   "scripts": {
     "start": "electron .",
-    "dist:win": "electron-builder --win",
-    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win --publish never",
+    "dist:mac": "electron-builder --mac --publish never",
     "smoke": "node scripts/smoke.cjs"
   },
   "keywords": [
