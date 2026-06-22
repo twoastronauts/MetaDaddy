@@ -34,4 +34,4 @@ macOS packaging must run on macOS:
 npm run dist:mac
 ```
 
-The included GitHub Actions workflow builds both Windows and macOS installers from the `main` branch.
+The included GitHub Actions workflow builds Windows, macOS Apple Silicon, and macOS Intel installers from the `main` branch.

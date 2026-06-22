@@ -36,10 +36,20 @@ jobs:
           if-no-files-found: error
 
   build-macos:
-    name: macOS installer
-    runs-on: macos-latest
+    name: macOS installer (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: "false"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: macos-26
+            artifact_name: MetaDADDY-macOS-arm64
+          - arch: x64
+            runner: macos-26-intel
+            artifact_name: MetaDADDY-macOS-x64
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -54,12 +64,12 @@ jobs:
         run: npm ci
 
       - name: Build macOS installer
-        run: npm run dist:mac
+        run: npx electron-builder --mac --${{ matrix.arch }} --publish never
 
       - name: Upload macOS installer
         uses: actions/upload-artifact@v4
         with:
-          name: MetaDADDY-macOS
+          name: ${{ matrix.artifact_name }}
           path: |
             release/*.dmg
             release/*.zip
